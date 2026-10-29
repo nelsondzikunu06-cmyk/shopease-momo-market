@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ClosingRouteImport } from './routes/closing'
+import { Route as ExpensesRouteImport } from './routes/expenses'
+import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as MomoRouteImport } from './routes/momo'
+import { Route as MoreRouteImport } from './routes/more'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SalesRouteImport } from './routes/sales'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClosingRoute = ClosingRouteImport.update({
+  id: '/closing',
+  path: '/closing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExpensesRoute = ExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MomoRoute = MomoRouteImport.update({
+  id: '/momo',
+  path: '/momo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MoreRoute = MoreRouteImport.update({
+  id: '/more',
+  path: '/more',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalesRoute = SalesRouteImport.update({
+  id: '/sales',
+  path: '/sales',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/closing': typeof ClosingRoute
+  '/expenses': typeof ExpensesRoute
+  '/inventory': typeof InventoryRoute
+  '/momo': typeof MomoRoute
+  '/more': typeof MoreRoute
+  '/reports': typeof ReportsRoute
+  '/sales': typeof SalesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/closing': typeof ClosingRoute
+  '/expenses': typeof ExpensesRoute
+  '/inventory': typeof InventoryRoute
+  '/momo': typeof MomoRoute
+  '/more': typeof MoreRoute
+  '/reports': typeof ReportsRoute
+  '/sales': typeof SalesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/closing': typeof ClosingRoute
+  '/expenses': typeof ExpensesRoute
+  '/inventory': typeof InventoryRoute
+  '/momo': typeof MomoRoute
+  '/more': typeof MoreRoute
+  '/reports': typeof ReportsRoute
+  '/sales': typeof SalesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/closing'
+    | '/expenses'
+    | '/inventory'
+    | '/momo'
+    | '/more'
+    | '/reports'
+    | '/sales'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/closing'
+    | '/expenses'
+    | '/inventory'
+    | '/momo'
+    | '/more'
+    | '/reports'
+    | '/sales'
+  id:
+    | '__root__'
+    | '/'
+    | '/closing'
+    | '/expenses'
+    | '/inventory'
+    | '/momo'
+    | '/more'
+    | '/reports'
+    | '/sales'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClosingRoute: typeof ClosingRoute
+  ExpensesRoute: typeof ExpensesRoute
+  InventoryRoute: typeof InventoryRoute
+  MomoRoute: typeof MomoRoute
+  MoreRoute: typeof MoreRoute
+  ReportsRoute: typeof ReportsRoute
+  SalesRoute: typeof SalesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/closing': {
+      id: '/closing'
+      path: '/closing'
+      fullPath: '/closing'
+      preLoaderRoute: typeof ClosingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/expenses': {
+      id: '/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof ExpensesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/momo': {
+      id: '/momo'
+      path: '/momo'
+      fullPath: '/momo'
+      preLoaderRoute: typeof MomoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/more': {
+      id: '/more'
+      path: '/more'
+      fullPath: '/more'
+      preLoaderRoute: typeof MoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sales': {
+      id: '/sales'
+      path: '/sales'
+      fullPath: '/sales'
+      preLoaderRoute: typeof SalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClosingRoute: ClosingRoute,
+  ExpensesRoute: ExpensesRoute,
+  InventoryRoute: InventoryRoute,
+  MomoRoute: MomoRoute,
+  MoreRoute: MoreRoute,
+  ReportsRoute: ReportsRoute,
+  SalesRoute: SalesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
