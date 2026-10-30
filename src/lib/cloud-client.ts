@@ -16,7 +16,11 @@ export function getBrowserCloudClient(): SupabaseClient<Database> {
       fetch: (input, init) => {
         const headers = new Headers(input instanceof Request ? input.headers : undefined);
         new Headers(init?.headers).forEach((value, key) => headers.set(key, value));
-        if (headers.get("Authorization") === `Bearer ${config.anonKey}` && config.anonKey.startsWith("sb_publishable_")) headers.delete("Authorization");
+        if (
+          headers.get("Authorization") === `Bearer ${config.anonKey}` &&
+          config.anonKey.startsWith("sb_publishable_")
+        )
+          headers.delete("Authorization");
         headers.set("apikey", config.anonKey);
         return fetch(input, { ...init, headers });
       },

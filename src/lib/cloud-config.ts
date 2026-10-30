@@ -3,7 +3,10 @@ export interface BrowserCloudConfig {
   anonKey: string;
 }
 
-export function validateBrowserCloudConfig(url?: string, anonKey?: string): BrowserCloudConfig | null {
+export function validateBrowserCloudConfig(
+  url?: string,
+  anonKey?: string,
+): BrowserCloudConfig | null {
   if (!url || !anonKey || anonKey.startsWith("sb_secret_")) return null;
   try {
     if (new URL(url).protocol !== "https:") return null;
@@ -11,7 +14,13 @@ export function validateBrowserCloudConfig(url?: string, anonKey?: string): Brow
       const payload = anonKey.split(".")[1];
       if (!payload) return null;
       const decoded: unknown = JSON.parse(atob(payload.replace(/-/g, "+").replace(/_/g, "/")));
-      if (typeof decoded !== "object" || decoded === null || !("role" in decoded) || decoded.role !== "anon") return null;
+      if (
+        typeof decoded !== "object" ||
+        decoded === null ||
+        !("role" in decoded) ||
+        decoded.role !== "anon"
+      )
+        return null;
     }
     return { url, anonKey };
   } catch {
@@ -20,5 +29,8 @@ export function validateBrowserCloudConfig(url?: string, anonKey?: string): Brow
 }
 
 export function browserCloudConfig() {
-  return validateBrowserCloudConfig(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY);
+  return validateBrowserCloudConfig(
+    import.meta.env.VITE_SUPABASE_URL,
+    import.meta.env.VITE_SUPABASE_ANON_KEY,
+  );
 }
