@@ -68,6 +68,8 @@ export function seedDemo() {
     { id: uid(), name: "Screen protector", qty: 25, cost: 5, price: 15, lowAt: 5 },
     { id: uid(), name: "Power bank 10000mAh", qty: 4, cost: 90, price: 150, lowAt: 2 },
   ].map((x) => ({ ...x, demo: true }));
+  const demoProduct = p[2];
+  if (!demoProduct) return;
   setState((s) => ({
     ...s,
     products: [...s.products, ...p],
@@ -78,7 +80,7 @@ export function seedDemo() {
       { id: uid(), at: at(90), type: "deposit", amount: 120, fee: 0, feeInCash: false, network: "Telecel", demo: true },
       { id: uid(), at: at(30), type: "other", direction: "cash_in", amount: 20, fee: 0.5, feeInCash: true, network: "AT", note: "Airtime", demo: true },
     ],
-    sales: [...s.sales, { id: uid(), at: at(60), productId: p[2].id, productName: p[2].name, qty: 2, unitPrice: 15, unitCost: 5, demo: true }],
+    sales: [...s.sales, { id: uid(), at: at(60), productId: demoProduct.id, productName: demoProduct.name, qty: 2, unitPrice: 15, unitCost: 5, demo: true }],
     expenses: [...s.expenses, { id: uid(), at: at(100), category: "Transport", amount: 10, note: "Trotro to float agent", demo: true }],
     openings: { ...s.openings, [today()]: s.openings[today()] ?? { cash: 1000, float: 2000 } },
   }));

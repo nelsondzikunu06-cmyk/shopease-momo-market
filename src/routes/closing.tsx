@@ -34,7 +34,7 @@ function Closing() {
 
   const vc = round2(num(cc) - d.expectedCash);
   const vf = round2(num(cf) - d.expectedFloat);
-  const tone = (v: number) => (v === 0 ? "success" : v < 0 ? "danger" : "accent") as const;
+  const tone = (v: number): "success" | "danger" | "accent" => (v === 0 ? "success" : v < 0 ? "danger" : "accent");
   const vs = (v: number) => (v > 0 ? "+" : v < 0 ? "−" : "") + fmtGHS(Math.abs(v));
 
   return (

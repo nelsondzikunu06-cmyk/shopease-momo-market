@@ -31,10 +31,10 @@ function Momo() {
   function submit(e: React.FormEvent) {
     e.preventDefault();
     const a = num(amount);
-    if (a <= 0) return toast.error("Enter an amount above 0");
+    if (a <= 0) { toast.error("Enter an amount above 0"); return; }
     setState((st) => ({
       ...st,
-      momo: [...st.momo, { id: uid(), at: new Date().toISOString(), type, amount: a, fee: num(fee), feeInCash, network, note: note.trim() || undefined, direction: type === "other" ? dir : undefined }],
+      momo: [...st.momo, { id: uid(), at: new Date().toISOString(), type, amount: a, fee: num(fee), feeInCash, network, ...(note.trim() ? { note: note.trim() } : {}), ...(type === "other" ? { direction: dir } : {}) }],
     }));
     toast.success(`${type} of ${fmtGHS(a)} saved`);
     setAmount(""); setFee(""); setNote("");

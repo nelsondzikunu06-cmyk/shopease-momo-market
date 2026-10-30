@@ -26,7 +26,7 @@ function Sales() {
     const p = s.products.find((x) => x.id === id);
     const q = qty[id] ?? 1;
     if (!p) return;
-    if (q > p.qty) return toast.error(`Only ${p.qty} in stock`);
+    if (q > p.qty) { toast.error(`Only ${p.qty} in stock`); return; }
     setState((st) => ({
       ...st,
       products: st.products.map((x) => (x.id === id ? { ...x, qty: x.qty - q } : x)),

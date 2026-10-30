@@ -20,15 +20,15 @@ const CATS = ["Transport", "Food", "Rent", "Electricity", "Airtime/Data", "Stock
 
 function Expenses() {
   const s = useStore();
-  const [cat, setCat] = useState(CATS[0]);
+  const [cat, setCat] = useState("Transport");
   const [amount, setAmount] = useState("");
   const [note, setNote] = useState("");
   const list = s.expenses.filter((x) => dayKey(x.at) === today()).slice().reverse();
   function submit(e: React.FormEvent) {
     e.preventDefault();
     const a = num(amount);
-    if (a <= 0) return toast.error("Enter an amount above 0");
-    setState((st) => ({ ...st, expenses: [...st.expenses, { id: uid(), at: new Date().toISOString(), category: cat, amount: a, note: note.trim() || undefined }] }));
+    if (a <= 0) { toast.error("Enter an amount above 0"); return; }
+    setState((st) => ({ ...st, expenses: [...st.expenses, { id: uid(), at: new Date().toISOString(), category: cat, amount: a, ...(note.trim() ? { note: note.trim() } : {}) }] }));
     toast.success("Expense saved");
     setAmount(""); setNote("");
   }

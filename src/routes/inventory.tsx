@@ -28,7 +28,7 @@ function Inventory() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!f.name.trim()) return toast.error("Name required");
+    if (!f.name.trim()) { toast.error("Name required"); return; }
     const p: Omit<Product, "id"> = { name: f.name.trim(), qty: Math.floor(num(f.qty)), cost: num(f.cost), price: num(f.price), lowAt: Math.floor(num(f.lowAt)) };
     if (p.price < p.cost) toast.warning("Selling price is below cost");
     setState((st) => ({
