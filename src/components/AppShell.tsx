@@ -22,7 +22,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             Shop<span className="text-primary">Ease</span>
           </Link>
           <div className="flex items-center gap-2 text-xs">
-            <span className="rounded-full bg-secondary px-2 py-1 capitalize text-muted-foreground">{s.role}</span>
+            <span className="rounded-full bg-secondary px-2 py-1 capitalize text-muted-foreground">Demo: {s.role}</span>
             <Link to="/more" className="flex items-center gap-1 rounded-full border border-accent/50 px-2 py-1 text-accent" aria-label="Data stored on this device only, not synced. Tap for backup.">
               <HardDrive className="h-3.5 w-3.5" aria-hidden /> Local only
             </Link>

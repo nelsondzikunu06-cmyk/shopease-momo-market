@@ -5,6 +5,7 @@ import { Receipt, ClipboardCheck, BarChart3, ChevronRight, ShieldAlert } from "l
 import { Page, Card, Btn, Segmented } from "@/components/kit";
 import { useStore, setState, exportJSON, importJSON, seedDemo, clearDemo, hasDemo } from "@/lib/store";
 import { emptyState } from "@/lib/ledger";
+import { CloudStatus } from "@/components/CloudStatus";
 
 export const Route = createFileRoute("/more")({
   head: () => ({
@@ -52,10 +53,11 @@ function More() {
             try { importJSON(await f.text()); toast.success("Backup restored"); } catch (err) { toast.error((err as Error).message); }
           }} />
       </Card>
+      <CloudStatus />
       <Card>
-        <h2 className="mb-2 font-semibold">Role on this device</h2>
-        <Segmented label="Role" value={s.role} onChange={(role) => setState((st) => ({ ...st, role }))} options={[{ value: "owner", label: "Owner" }, { value: "attendant", label: "Attendant" }]} />
-        <p className="mt-2 text-xs text-muted-foreground">Attendant hides cost prices, deleting and restore. This is a convenience switch only — <b>not secure</b> — anyone with the phone can change it. Real access control needs sign-in and a backend.</p>
+        <h2 className="mb-2 font-semibold">Demo-only local view</h2>
+        <Segmented label="Demo-only local role" value={s.role} onChange={(role) => setState((st) => ({ ...st, role }))} options={[{ value: "owner", label: "Demo owner" }, { value: "attendant", label: "Demo attendant" }]} />
+        <p className="mt-2 text-xs text-muted-foreground">This only changes local display and controls. It is <b>not secure access control</b> and grants no cloud permissions. Cloud membership roles are separate and cannot be changed here.</p>
       </Card>
       <Card>
         <h2 className="mb-2 font-semibold">Demo data</h2>
