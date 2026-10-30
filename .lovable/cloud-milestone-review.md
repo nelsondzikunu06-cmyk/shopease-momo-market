@@ -23,7 +23,7 @@
 
 ## Validation
 - 13 tests passed: seven cloud configuration/read-scoping tests, five ledger tests, one route test.
-- All touched code passed targeted ESLint. Whole-project lint initially failed with 786 formatting errors and seven warnings, including untouched files; no broad formatting rewrite performed.
+- All touched code passed targeted ESLint. Final whole-project lint failed with 606 formatting errors and seven warnings in remaining untouched files; no broad formatting rewrite performed.
 - Automatic preview checks reported `build OK` at 00:54:47 and 00:55:08 UTC. No manually invoked production build: platform-managed build/typecheck workflow used; published runtime not verified.
 - Browser checks visited all eight routes, verified desktop/mobile status and demo view switching, and completed local product creation, sale/stock decrement, MoMo entry, expense, report, backup export and reload persistence. Zero cloud data/auth requests and zero page errors were observed; no mobile horizontal overflow.
 - Closing forms, backup restore and authenticated cloud behavior were not exercised end-to-end in this milestone.
