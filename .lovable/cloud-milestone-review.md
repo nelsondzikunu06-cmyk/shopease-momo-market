@@ -19,6 +19,14 @@
 - These are scaffolding only: no auth calls, remote fetches, cloud mutations, migrations, financial reads, or selection UI invoked by the application.
 - Cloud status appears under More and labels configuration separately from sync. Demo role remains local convenience only.
 - Original store/key, backups, financial operations and local records unchanged.
+- Repaired existing strict TypeScript issues in store demo indexing and financial form return/optional-property handling without changing ledger rules; formatted touched files and supplied explicit social metadata on all eight existing content routes.
+
+## Validation
+- 13 tests passed: seven cloud configuration/read-scoping tests, five ledger tests, one route test.
+- All touched code passed targeted ESLint. Whole-project lint initially failed with 786 formatting errors and seven warnings, including untouched files; no broad formatting rewrite performed.
+- Automatic preview checks reported `build OK` at 00:54:47 and 00:55:08 UTC. No manually invoked production build: platform-managed build/typecheck workflow used; published runtime not verified.
+- Browser checks visited all eight routes, verified desktop/mobile status and demo view switching, and completed local product creation, sale/stock decrement, MoMo entry, expense, report, backup export and reload persistence. Zero cloud data/auth requests and zero page errors were observed; no mobile horizontal overflow.
+- Closing forms, backup restore and authenticated cloud behavior were not exercised end-to-end in this milestone.
 
 ## Deferred
 - Profile decision required before authentication implementation; auth settings verification and sign-in/session/private-gate testing not completed.
