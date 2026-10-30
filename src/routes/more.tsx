@@ -18,6 +18,8 @@ import { CloudStatus } from "@/components/CloudStatus";
 export const Route = createFileRoute("/more")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "ShopEase — More, backup & settings" },
       { name: "description", content: "Expenses, daily closing, reports, backup and restore." },
       { property: "og:title", content: "ShopEase — More, backup & settings" },

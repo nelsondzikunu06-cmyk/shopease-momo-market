@@ -45,7 +45,16 @@ export const uid = () => Math.random().toString(36).slice(2) + Date.now().toStri
 export const today = () => dayKey(new Date());
 
 export function exportJSON() {
-  const blob = new Blob([JSON.stringify({ app: "ShopEase", version: 1, exportedAt: new Date().toISOString(), data: getState() }, null, 2)], { type: "application/json" });
+  const blob = new Blob(
+    [
+      JSON.stringify(
+        { app: "ShopEase", version: 1, exportedAt: new Date().toISOString(), data: getState() },
+        null,
+        2,
+      ),
+    ],
+    { type: "application/json" },
+  );
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = `shopease-backup-${today()}.json`;
@@ -55,7 +64,8 @@ export function exportJSON() {
 export function importJSON(text: string) {
   const parsed = JSON.parse(text);
   const data = parsed?.data ?? parsed;
-  if (!data || !Array.isArray(data.momo) || !Array.isArray(data.products)) throw new Error("Not a ShopEase backup file");
+  if (!data || !Array.isArray(data.momo) || !Array.isArray(data.products))
+    throw new Error("Not a ShopEase backup file");
   setState(() => ({ ...emptyState(), ...data }));
 }
 
@@ -75,13 +85,73 @@ export function seedDemo() {
     products: [...s.products, ...p],
     momo: [
       ...s.momo,
-      { id: uid(), at: at(200), type: "deposit", amount: 300, fee: 0, feeInCash: false, network: "MTN", demo: true },
-      { id: uid(), at: at(150), type: "withdrawal", amount: 500, fee: 5, feeInCash: false, network: "MTN", demo: true },
-      { id: uid(), at: at(90), type: "deposit", amount: 120, fee: 0, feeInCash: false, network: "Telecel", demo: true },
-      { id: uid(), at: at(30), type: "other", direction: "cash_in", amount: 20, fee: 0.5, feeInCash: true, network: "AT", note: "Airtime", demo: true },
+      {
+        id: uid(),
+        at: at(200),
+        type: "deposit",
+        amount: 300,
+        fee: 0,
+        feeInCash: false,
+        network: "MTN",
+        demo: true,
+      },
+      {
+        id: uid(),
+        at: at(150),
+        type: "withdrawal",
+        amount: 500,
+        fee: 5,
+        feeInCash: false,
+        network: "MTN",
+        demo: true,
+      },
+      {
+        id: uid(),
+        at: at(90),
+        type: "deposit",
+        amount: 120,
+        fee: 0,
+        feeInCash: false,
+        network: "Telecel",
+        demo: true,
+      },
+      {
+        id: uid(),
+        at: at(30),
+        type: "other",
+        direction: "cash_in",
+        amount: 20,
+        fee: 0.5,
+        feeInCash: true,
+        network: "AT",
+        note: "Airtime",
+        demo: true,
+      },
     ],
-    sales: [...s.sales, { id: uid(), at: at(60), productId: demoProduct.id, productName: demoProduct.name, qty: 2, unitPrice: 15, unitCost: 5, demo: true }],
-    expenses: [...s.expenses, { id: uid(), at: at(100), category: "Transport", amount: 10, note: "Trotro to float agent", demo: true }],
+    sales: [
+      ...s.sales,
+      {
+        id: uid(),
+        at: at(60),
+        productId: demoProduct.id,
+        productName: demoProduct.name,
+        qty: 2,
+        unitPrice: 15,
+        unitCost: 5,
+        demo: true,
+      },
+    ],
+    expenses: [
+      ...s.expenses,
+      {
+        id: uid(),
+        at: at(100),
+        category: "Transport",
+        amount: 10,
+        note: "Trotro to float agent",
+        demo: true,
+      },
+    ],
     openings: { ...s.openings, [today()]: s.openings[today()] ?? { cash: 1000, float: 2000 } },
   }));
 }
@@ -94,4 +164,5 @@ export function clearDemo() {
     expenses: s.expenses.filter((x) => !x.demo),
   }));
 }
-export const hasDemo = (s: State) => [s.products, s.momo, s.sales, s.expenses].some((l) => l.some((x) => x.demo));
+export const hasDemo = (s: State) =>
+  [s.products, s.momo, s.sales, s.expenses].some((l) => l.some((x) => x.demo));
